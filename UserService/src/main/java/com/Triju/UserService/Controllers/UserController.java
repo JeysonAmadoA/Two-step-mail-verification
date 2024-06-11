@@ -1,11 +1,11 @@
 package com.Triju.UserService.Controllers;
 
-import com.Triju.UserService.Dto.ActivateUserDto;
-import com.Triju.UserService.Dto.RegisterUserDto;
-import com.Triju.UserService.Dto.UserDto;
+import com.Triju.UserService.Dto.Users.ActivateUserDto;
+import com.Triju.UserService.Dto.Users.RegisterUserDto;
+import com.Triju.UserService.Dto.Users.UserDto;
 import com.Triju.UserService.Exceptions.PasswordNotMatchException;
 import com.Triju.UserService.Exceptions.UserNotFoundException;
-import com.Triju.UserService.Services.Implementation.UserServiceInterface;
+import com.Triju.UserService.Services.Implementation.UserService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -17,9 +17,9 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/users")
 public class UserController {
 
-    private final UserServiceInterface userService;
+    private final UserService userService;
 
-    public UserController(UserServiceInterface userService) {
+    public UserController(UserService userService) {
         this.userService = userService;
     }
 

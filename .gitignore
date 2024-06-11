@@ -1,6 +1,8 @@
 .gradle
 **/build/
 !src/**/build/
+.idea
+.devops/kafka_data
 
 # Ignore Gradle GUI config
 gradle-app.setting

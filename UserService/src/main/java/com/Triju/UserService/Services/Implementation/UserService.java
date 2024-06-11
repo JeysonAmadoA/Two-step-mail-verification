@@ -1,12 +1,12 @@
 package com.Triju.UserService.Services.Implementation;
 
-import com.Triju.UserService.Dto.ActivateUserDto;
-import com.Triju.UserService.Dto.RegisterUserDto;
-import com.Triju.UserService.Dto.UserDto;
+import com.Triju.UserService.Dto.Users.ActivateUserDto;
+import com.Triju.UserService.Dto.Users.RegisterUserDto;
+import com.Triju.UserService.Dto.Users.UserDto;
 import com.Triju.UserService.Exceptions.PasswordNotMatchException;
 import com.Triju.UserService.Exceptions.UserNotFoundException;
 
-public interface UserServiceInterface {
+public interface UserService {
 
     UserDto createUser(RegisterUserDto userDto) throws PasswordNotMatchException;
 

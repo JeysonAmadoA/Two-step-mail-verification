@@ -1,0 +1,18 @@
+allprojects {
+    repositories {
+        jcenter()
+    }
+}
+
+subprojects {
+    apply plugin: 'java'
+    apply plugin: 'idea'
+}
+
+project(':MailService') {
+
+}
+
+project(':UserService') {
+
+}

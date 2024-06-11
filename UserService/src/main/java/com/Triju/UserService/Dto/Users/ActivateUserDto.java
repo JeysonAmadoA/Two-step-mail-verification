@@ -1,4 +1,4 @@
-package com.Triju.UserService.Dto;
+package com.Triju.UserService.Dto.Users;
 
 import lombok.Data;
 

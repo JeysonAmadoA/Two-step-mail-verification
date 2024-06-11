@@ -1,7 +1,8 @@
 package com.Triju.UserService.Mappers;
 
-import com.Triju.UserService.Dto.RegisterUserDto;
-import com.Triju.UserService.Dto.UserDto;
+import com.Triju.UserService.Dto.Users.ActivateUserEventDto;
+import com.Triju.UserService.Dto.Users.RegisterUserDto;
+import com.Triju.UserService.Dto.Users.UserDto;
 import com.Triju.UserService.Entities.User;
 import org.springframework.stereotype.Component;
 
@@ -15,6 +16,15 @@ public class UserMapper {
                 .birthDay(registerUserDto.getBirthDay())
                 .email(registerUserDto.getEmail())
                 .verifiedUser(false)
+                .build();
+    }
+
+    public ActivateUserEventDto EntityToDto(User user, String activationToken){
+        return ActivateUserEventDto.builder()
+                .id(user.getId())
+                .name(user.getName())
+                .email(user.getEmail())
+                .activationToken(activationToken)
                 .build();
     }
 

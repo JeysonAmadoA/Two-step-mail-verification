@@ -1,8 +1,8 @@
 package com.Triju.UserService.Services.Interfaces;
 
-import com.Triju.UserService.Dto.ActivateUserDto;
-import com.Triju.UserService.Dto.RegisterUserDto;
-import com.Triju.UserService.Dto.UserDto;
+import com.Triju.UserService.Dto.Users.ActivateUserDto;
+import com.Triju.UserService.Dto.Users.RegisterUserDto;
+import com.Triju.UserService.Dto.Users.UserDto;
 import com.Triju.UserService.Entities.User;
 import static com.Triju.UserService.Helpers.UserHelper.*;
 
@@ -10,19 +10,23 @@ import com.Triju.UserService.Exceptions.PasswordNotMatchException;
 import com.Triju.UserService.Exceptions.UserNotFoundException;
 import com.Triju.UserService.Mappers.UserMapper;
 import com.Triju.UserService.Repositories.UserRepository;
-import com.Triju.UserService.Services.Implementation.UserServiceInterface;
+import com.Triju.UserService.Services.Implementation.UserEventService;
+import com.Triju.UserService.Services.Implementation.UserService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
-public class UserServiceImpl implements UserServiceInterface {
+public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;
 
+    private final UserEventService userEventService;
+
     private final UserMapper userMapper;
 
-    public UserServiceImpl(UserRepository userRepository, UserMapper userMapper) {
+    public UserServiceImpl(UserRepository userRepository, UserEventService userEventService, UserMapper userMapper) {
         this.userRepository = userRepository;
+        this.userEventService = userEventService;
         this.userMapper = userMapper;
     }
 
@@ -39,6 +43,7 @@ public class UserServiceImpl implements UserServiceInterface {
         user.setActivationToken(encoder.encode(activationToken));
         try {
             User userCreated = userRepository.save(user);
+            userEventService.publishEvent(userMapper.EntityToDto(userCreated, activationToken));
             return userMapper.EntityToDto(userCreated);
         } catch (Exception e){
             throw new RuntimeException("Error al crear usuario");
