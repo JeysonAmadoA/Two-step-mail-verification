@@ -10,8 +10,9 @@ public class MailMapper {
     public MailDto createDtoFromEvent(CreateUserEvent event){
         MailDto dto = new MailDto();
         dto.setTo(event.getData().getEmail());
-        dto.setSubject("Confirm Mail");
+        dto.setSubject("Activation Code");
         dto.setBody("Email Confirmation Code: " + event.getData().getActivationToken());
+        dto.setData(event);
         return dto;
     }
 }
