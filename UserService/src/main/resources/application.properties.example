@@ -1,0 +1,13 @@
+spring.application.name=UserService
+server.port=8181
+
+#H2 Database Configuration
+spring.datasource.driverClassName=org.h2.Driver
+spring.datasource.url=jdbc:h2:mem:users
+spring.datasource.username=sa
+spring.datasource.password=
+spring.h2.console.enabled=true
+
+# Kafka configuration
+spring.kafka.bootstrap-servers=<KAFKA_HOST>
+kafka.topic.createUser=<CREATE_USER_TOPIC_NAME>
