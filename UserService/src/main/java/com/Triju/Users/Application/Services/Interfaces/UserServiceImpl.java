@@ -62,6 +62,7 @@ public class UserServiceImpl implements UserService {
         if(isActivated){
             userFound.setVerifiedUser(true);
             userRepository.save(userFound);
+            userEventService.publishEvent(userMapper.EntityToDto(userFound));
             return "Activación de usuario completada";
         } else {
             return "No fue posible activar el usuario. El código no coincide";

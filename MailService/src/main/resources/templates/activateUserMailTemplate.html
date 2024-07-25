@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Activation Successful</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            color: #333;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 600px;
+            margin: 50px auto;
+            background: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .header {
+            text-align: center;
+            background: #007bff;
+            color: #fff;
+            padding: 10px 0;
+            border-top-left-radius: 10px;
+            border-top-right-radius: 10px;
+        }
+        .header h1 {
+            margin: 0;
+        }
+        .content {
+            padding: 20px;
+        }
+        .content p {
+            font-size: 16px;
+            color: #555;
+        }
+        .info {
+            margin-top: 20px;
+        }
+        .info p {
+            margin-bottom: 5px;
+        }
+        .footer {
+            text-align: center;
+            padding: 10px 0;
+            font-size: 12px;
+            color: #999;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="header">
+        <h1>Activation Successful</h1>
+    </div>
+    <div class="content">
+        <p>Hello <span th:text="${userData.getName()}"></span>,</p>
+        <p>Your account has been successfully activated with the following details:</p>
+        <div class="info">
+            <p><strong>ID:</strong> <span th:text="${userData.getId()}"></span></p>
+            <p><strong>Name:</strong> <span th:text="${userData.getName()}"></span></p>
+            <p><strong>Last Name:</strong> <span th:text="${userData.getLastName()}"></span></p>
+            <p><strong>Email:</strong> <span th:text="${userData.getEmail()}"></span></p>
+            <p><strong>Birthday:</strong> <span th:text="${userData.getBirthDay()}"></span></p>
+        </div>
+    </div>
+    <div class="footer">
+        <p>Thank you for using our service.</p>
+    </div>
+</div>
+</body>
+</html>

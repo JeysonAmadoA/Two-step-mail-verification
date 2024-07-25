@@ -5,6 +5,7 @@ import com.Triju.Mail.Application.Services.HtmlTemplates.UserHtmlTemplateService
 import com.Triju.Mail.Application.Services.MailService;
 import com.Triju.Mail.Domain.Dto.Mail.MailDto;
 import com.Triju.Mail.Domain.Dto.Users.CreateUserEvent;
+import com.Triju.Mail.Domain.Dto.Users.UserActivateSuccessEvent;
 import jakarta.mail.MessagingException;
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.stereotype.Component;
@@ -41,5 +42,18 @@ public class UserListener {
         String htmlContent = userHtmlTemplateService.getHtmlContent(mailDto);
         this.mailService.sendHtmlMail(mailDto, htmlContent);
         System.out.println("Email Sent: " + createUserEvent.getData().getEmail());
+    }
+
+    @KafkaListener(
+            topics = "${kafka.topic.activateUser}",
+            groupId = "group-default"
+    )
+    public void userActivationListener(String message) throws IOException, MessagingException {
+        UserActivateSuccessEvent activateUserEvent = getObjectFromJson(message, UserActivateSuccessEvent.class);
+        MailDto mailDto = this.mailMapper.createDtoFromEvent(activateUserEvent);
+        userHtmlTemplateService.setStrategy(mailDto.getData().getType());
+        String htmlContent = userHtmlTemplateService.getHtmlContent(mailDto);
+        this.mailService.sendHtmlMail(mailDto, htmlContent);
+        System.out.println("Activation Email Sent: " + activateUserEvent.getData().getEmail());
     }
 }
